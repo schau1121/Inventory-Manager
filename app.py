@@ -13,7 +13,7 @@ api = Api(app)
 def create_tables():
     db.create_all()
 
-api.add_resource(Warehouse, "/warehouse/<string:name>")
+api.add_resource(Warehouse, "api/warehouse/<string:name>")
 
 if __name__ == "__main__":
     db.init_app(app)
