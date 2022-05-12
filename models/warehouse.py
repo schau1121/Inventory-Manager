@@ -1,4 +1,8 @@
 from db import db
+
+# A warehouse should contain a name and a location
+# There should not be multiple warehouses with the same name or location
+
 class WarehouseModel(db.Model):
     __tablename__ = "warehouses"
     
@@ -13,9 +17,11 @@ class WarehouseModel(db.Model):
         self.location = location
     
     def json(self):
-        return {'name': self.name,
-                "location": self.location,
-                "items": [item.json() for item in self.items.all()]}
+        return {
+            'name': self.name,
+            "location": self.location,
+            "items": [item.json() for item in self.items.all()]
+        }
 
     def save_to_db(self):
         db.session.add(self)
