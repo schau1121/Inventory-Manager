@@ -31,7 +31,12 @@ a {
     text-align: center;
 }
 
+.content {
+    padding: 5px 25px;
+}
+
 a#github {
     justify-self: end;
     margin-top: auto;
 }
+
