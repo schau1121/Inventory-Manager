@@ -1,4 +1,5 @@
 from db import db
+from models.warehouse import WarehouseModel
 
 # An item should contain a name, model_num, inventory amount
 # and a warehouse id
@@ -31,7 +32,9 @@ class ItemModel(db.Model):
         return {
             'name': self.name,
             'model_num': self.model_num,
-            'inventory': self.inventory
+            'inventory': self.inventory,
+            "warehouse_id": self.warehouse_id,
+            "warehouse": str(self.warehouse)
         }
         
     def save_to_db(self):

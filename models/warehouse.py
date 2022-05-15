@@ -16,6 +16,9 @@ class WarehouseModel(db.Model):
         self.name = name
         self.location = location
     
+    def __str__(self):
+        return self.name
+    
     def json(self):
         return {
             'name': self.name,
