@@ -7,7 +7,7 @@ from resources.item import AllItemsList, Item, ItemList
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///data.db'
-
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 api = Api(app)
 
 @app.before_first_request
