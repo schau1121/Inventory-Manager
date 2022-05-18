@@ -26,8 +26,37 @@
                 <div class="header-block">
                     <h1>Items</h1>
                 </div>
-                <div class="cards"></div>
+                <div class="items-table"></div>
+                <button id="new-item">New</button>
             </div>
+        </div>
+    </div>
+
+    <div class="new-overlay">
+        <div class="item-form">
+            <form id="new-item-form">
+                <label for="item-name">Item name:</label><br>
+                <input type="text" id="item-name"><br>
+                <label for="item-model">Item model number:</label><br>
+                <input type="text" id="item-model"><br>
+                <label for="item-inventory">Item inventory:</label><br>
+                <input type="text" id="item-inventory"><br>
+                <label for="item-warehouse">Item warehouse number:</label><br>
+                <input type="text" id="item-warehouse-num"><br>
+                <button id="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="edit-overlay">
+        <div class="item-form">
+            <form id="edit-item-form">
+                <label for="edit-item-model">Item model number:</label><br>
+                <input type="text" id="edit-item-model"><br>
+                <label for="edit-item-inventory">Item inventory:</label><br>
+                <input type="text" id="edit-item-inventory"><br>
+                <button id="edit-submit">Submit</button>
+            </form>
         </div>
     </div>
 </body>

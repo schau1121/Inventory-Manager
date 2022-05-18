@@ -1,11 +1,10 @@
 const cards = document.querySelector(".cards");
 const all_items_url = `${window.location.href}api/items`;
-let itemList;
 
 getItems();
 
 function createCard(item, quantity, warehouse) {
-    item = item[0].toUpperCase() + item.substring(1);
+    item = '"' + item[0].toUpperCase() + item.substring(1) + '"';
     item = item.replace(/_/g, " ");
 
     if(cards.innerText === "Nothing to see here...for now!") {
@@ -31,7 +30,8 @@ function getItems() {
 }
 
 function renderCards(itemList) {
-    itemList.map(item => {
+    console.table(itemList);
+    itemList.forEach(item => {
         if(item.inventory <= 100) {
             createCard(item.name, item.inventory, item.warehouse);
         }
