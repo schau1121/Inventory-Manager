@@ -39,6 +39,7 @@ th, td {
     color: white;
     overflow: hidden;
     text-align: center;
+    flex-shrink: 0;
 }
 
 .content {

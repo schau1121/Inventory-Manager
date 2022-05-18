@@ -5,6 +5,8 @@ const new_overlay = document.querySelector(".new-overlay");
 const edit_overlay = document.querySelector(".edit-overlay");
 const edit_submit_btn = document.querySelector("button#edit-submit");
 const new_submit_btn = document.querySelector("button#submit");
+let curr_item_id;
+
 
 new_item_btn.addEventListener("click", e => {
     new_overlay.style.display = "flex";
@@ -19,8 +21,6 @@ new_submit_btn.addEventListener("click", e => {
     handleNewSubmit();
     new_overlay.style.display = "none";
 })
-
-let curr_item_url;
 
 getAllItems();
 
@@ -98,7 +98,7 @@ function populateTable(items) {
         curr_row_edit_btn.innerHTML = "⁝";
         curr_row_edit_btn.id = `${item.name}&${item.warehouse_id}`;
         curr_row_edit_btn.addEventListener("click", e => {
-            curr_item_url = e.target.id;
+            curr_item_id = e.target.id;
             openEditOverlay();
         })
 
@@ -122,11 +122,12 @@ function populateTable(items) {
         curr_row.appendChild(curr_row_del);
 
         tbody.appendChild(curr_row);
+        row_num++;
     })
 }
 
-async function deleteItem(url) {
-    let item_url = `${window.location.href.replace("items?", `api/item/${url}`)}`;
+async function deleteItem(id) {
+    let item_url = `${window.location.href.replace("items?", `api/item/${id}`)}`;
     let del_response = fetch(item_url, {
         method: "DELETE"
     })
@@ -134,8 +135,8 @@ async function deleteItem(url) {
     return del_response;
 }
 
-async function putItem(item, url) {
-    let item_url = `${window.location.href.replace("items", `api/item/${url}`)}`;
+async function putItem(item, id) {
+    let item_url = `${window.location.href.replace("items", `api/item/${id}`)}`;
     console.log(item_url);
     let put_response = fetch(item_url, {
         method: "PUT",
@@ -148,8 +149,8 @@ async function putItem(item, url) {
     return put_response;
 }
 
-async function postItem(item) {
-    let item_url = `${window.location.href.replace("item", `${item.name}&${item.warehouse_id}`)}`;
+async function postItem(item, id) {
+    let item_url = `${window.location.href.replace("items", `api/item/${id}`)}`;
     let post_response = fetch(item_url, {
         method: "POST",
         headers: {
@@ -176,21 +177,21 @@ async function handleEditSubmit() {
     let edited_item = {
         "model_num": new_model_num,
         "inventory": new_inventory
-    }
-    await putItem(edited_item, curr_item_url);
+    };
+    await putItem(edited_item, curr_item_id);
     refreshTable();
 }
 
 async function handleNewSubmit() {
-    let name = document.querySelector("input#item-name").value;
-    let model = document.querySelector("input#item-model").value;
-    let inventory = document.querySelector("input#item-inventory").value;
-    let warehouse_id = document.querySelector("input#warehouse-num").value;
-    let item = {
+    const name = document.querySelector("input#item-name").value;
+    const model = document.querySelector("input#item-model").value;
+    const inventory = document.querySelector("input#item-inventory").value;
+    const warehouse_id = document.querySelector("input#item-warehouse-num").value;
+    let new_item = {
         "model_num": model,
-        "inventory": inventory,
-    }
-    curr_item_url = `${name}&${warehouse_id}`;
-    await postItem(item, curr_item_url);
+        "inventory": inventory
+    };
+    curr_item_id = `${name}&${warehouse_id}`;
+    await postItem(new_item, curr_item_id);
     refreshTable();
 }
