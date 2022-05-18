@@ -1,4 +1,3 @@
-import { v1 as uuidv1 } from "uuid";
 const items_table = document.querySelector(".items-table");
 const all_items_url = `${window.location.href.replace("items", "api/items")}`;
 const new_item_btn = document.querySelector("button#new-item");
@@ -31,8 +30,10 @@ function createTable() {
     let tbody = document.createElement("tbody");
 
     let row_1 = document.createElement("tr");
+    let heading_0 = document.createElement("th");
+    heading_0.innerHTML = "Row No.";
     let heading_1 = document.createElement("th");
-    heading_1.innerHTML = "Row No.";
+    heading_1.innerHTML = "UUID";
     let heading_2 = document.createElement("th");
     heading_2.innerHTML = "Item Name";
     let heading_3 = document.createElement("th");
@@ -48,6 +49,7 @@ function createTable() {
     let heading_8 = document.createElement("th");
     heading_8.innerHTML = "Delete";
 
+    row_1.appendChild(heading_0);
     row_1.appendChild(heading_1);
     row_1.appendChild(heading_2);
     row_1.appendChild(heading_3);
@@ -78,7 +80,8 @@ function populateTable(items) {
     let row_num = 1;
     items.forEach(item => {
         let curr_row = document.createElement("tr");
-        let curr_row_id = document.createElement("td");
+        let curr_row_num = document.createElement("td");
+        let curr_row_uuid = document.createElement("td");
         let curr_row_name = document.createElement("td");
         let curr_row_model = document.createElement("td");
         let curr_row_inventory = document.createElement("td");
@@ -89,7 +92,8 @@ function populateTable(items) {
         let curr_row_del = document.createElement("td");
         let curr_row_del_btn = document.createElement("button");
 
-        curr_row_id.innerHTML = row_num;
+        curr_row_num.innerHTML = row_num;
+        curr_row_uuid.innerHTML = item.uuid;
         curr_row_name.innerHTML = item.name;
         curr_row_model.innerHTML = item.model_num;
         curr_row_inventory.innerHTML = item.inventory;
@@ -113,7 +117,8 @@ function populateTable(items) {
         curr_row_edit.appendChild(curr_row_edit_btn);
         curr_row_del.appendChild(curr_row_del_btn);
 
-        curr_row.appendChild(curr_row_id);
+        curr_row.appendChild(curr_row_num);
+        curr_row.appendChild(curr_row_uuid);
         curr_row.appendChild(curr_row_name);
         curr_row.appendChild(curr_row_model);
         curr_row.appendChild(curr_row_inventory);
@@ -173,26 +178,54 @@ function refreshTable() {
 }
 
 async function handleEditSubmit() {
+    const new_name = document.querySelector("input#edit-item-name").value;
     const new_model_num = document.querySelector("input#edit-item-model").value;
     const new_inventory = document.querySelector("input#edit-item-inventory").value;
+    const new_warehouse_id = document.querySelector("input#edit-item-warehouse-num").value;
     let edited_item = {
+        "name": new_name,
         "model_num": new_model_num,
-        "inventory": new_inventory
+        "inventory": new_inventory,
+        "warehouse_id": new_warehouse_id
     };
     await putItem(edited_item, curr_item_id);
     refreshTable();
 }
 
+/*
+    This function handles the submit request when creating a new item
+*/
 async function handleNewSubmit() {
     const name = document.querySelector("input#item-name").value;
     const model = document.querySelector("input#item-model").value;
     const inventory = document.querySelector("input#item-inventory").value;
     const warehouse_id = document.querySelector("input#item-warehouse-num").value;
     let new_item = {
+        "name": name,
         "model_num": model,
-        "inventory": inventory
+        "inventory": inventory,
+        "warehouse_id": warehouse_id
     };
-    curr_item_id = uuidv1();
+    curr_item_id = createUUID();
     await postItem(new_item, curr_item_id);
     refreshTable();
+}
+
+/*
+    I'm utilizing this function instead of a UUID generator due since this
+    project is written in vanilla js and I don't have enough time to figure
+    out how to make modules work
+
+    Need to change to something more secure
+*/
+function createUUID(){
+    let dt = new Date().getTime()
+    
+    const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = (dt + Math.random()*16)%16 | 0
+        dt = Math.floor(dt/16)
+        return (c=='x' ? r :(r&0x3|0x8)).toString(16)
+    })
+    
+    return uuid
 }
