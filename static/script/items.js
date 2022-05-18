@@ -1,3 +1,4 @@
+import { v1 as uuidv1 } from "uuid";
 const items_table = document.querySelector(".items-table");
 const all_items_url = `${window.location.href.replace("items", "api/items")}`;
 const new_item_btn = document.querySelector("button#new-item");
@@ -96,14 +97,14 @@ function populateTable(items) {
         curr_row_warehouse.innerHTML = item.warehouse;
 
         curr_row_edit_btn.innerHTML = "⁝";
-        curr_row_edit_btn.id = `${item.name}&${item.warehouse_id}`;
+        curr_row_edit_btn.id = item.uuid;
         curr_row_edit_btn.addEventListener("click", e => {
             curr_item_id = e.target.id;
             openEditOverlay();
         })
 
         curr_row_del_btn.innerHTML = "×";
-        curr_row_del_btn.id = `${item.name}&${item.warehouse_id}`;
+        curr_row_del_btn.id = item.uuid;
         curr_row_del_btn.addEventListener("click", async function(e) {
             await deleteItem(e.target.id);
             refreshTable();
@@ -127,7 +128,7 @@ function populateTable(items) {
 }
 
 async function deleteItem(id) {
-    let item_url = `${window.location.href.replace("items?", `api/item/${id}`)}`;
+    let item_url = `${window.location.href.replace("items", `api/item/${id}`)}`;
     let del_response = fetch(item_url, {
         method: "DELETE"
     })
@@ -191,7 +192,7 @@ async function handleNewSubmit() {
         "model_num": model,
         "inventory": inventory
     };
-    curr_item_id = `${name}&${warehouse_id}`;
+    curr_item_id = uuidv1();
     await postItem(new_item, curr_item_id);
     refreshTable();
 }

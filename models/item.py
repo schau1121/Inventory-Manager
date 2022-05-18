@@ -17,13 +17,15 @@ class ItemModel(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
+    uuid = db.Column(db.String(150))
     model_num = db.Column(db.String(50))
     inventory = db.Column(db.Integer)
     warehouse_id = db.Column(db.Integer, db.ForeignKey('warehouses.id'))
     warehouse = db.relationship("WarehouseModel")
     
-    def __init__(self, name, model_num, inventory, warehouse_id):
+    def __init__(self, name, uuid, model_num, inventory, warehouse_id):
         self.name = name
+        self.uuid = uuid
         self.model_num = model_num
         self.inventory = inventory
         self.warehouse_id = warehouse_id
@@ -34,7 +36,8 @@ class ItemModel(db.Model):
             'model_num': self.model_num,
             'inventory': self.inventory,
             "warehouse_id": self.warehouse_id,
-            "warehouse": str(self.warehouse)
+            "warehouse": str(self.warehouse),
+            "uuid": self.uuid
         }
         
     def save_to_db(self):
@@ -45,6 +48,10 @@ class ItemModel(db.Model):
         db.session.delete(self)
         db.session.commit()
     
+    @classmethod
+    def find_by_uuid(cls, uuid):
+        return cls.query.filter_by(uuid=uuid).first()
+
     @classmethod
     def find_by_name_warehouse(cls, name, warehouse_id):
         return cls.query.filter_by(name=name, warehouse_id=warehouse_id).first()

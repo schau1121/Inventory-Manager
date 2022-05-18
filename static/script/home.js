@@ -4,10 +4,9 @@ const all_items_url = `${window.location.href}api/items`;
 getItems();
 
 function createCard(item, quantity, warehouse) {
-    item = '"' + item[0].toUpperCase() + item.substring(1) + '"';
-    item = item.replace(/_/g, " ");
+    item = '"' + item + '"';
 
-    if(cards.innerText === "Nothing to see here...for now!") {
+    if(cards.innerText === "This is where you will be notified if there are any items with low inventory.") {
         cards.innerText = "";
     }
 

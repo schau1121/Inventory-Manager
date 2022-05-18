@@ -28,7 +28,7 @@ def warehouses():
 
 api.add_resource(Warehouse, "/api/warehouse/<string:name>")
 api.add_resource(WarehouseList, "/api/warehouses")
-api.add_resource(Item, "/api/item/<string:name>&<int:warehouse_id>")
+api.add_resource(Item, "/api/item/<string:uuid>")
 api.add_resource(ItemList, "/api/item/<string:name>")
 api.add_resource(AllItemsList, "/api/items")
 
