@@ -10,6 +10,10 @@ class WarehouseModel(db.Model):
     name = db.Column(db.String(80))
     location = db.Column(db.String(100))
     
+    # the lazy=dynamic parameter allows us to call methods on the 
+    # query object, such as .all(), or .first(), basically giving us more
+    # options on how we want to query the items
+    # (see the .json() method)
     items = db.relationship("ItemModel", lazy="dynamic")
     
     def __init__(self, name, location):
@@ -35,6 +39,8 @@ class WarehouseModel(db.Model):
         db.session.delete(self)
         db.session.commit()
     
+    # below are class methods which help find warehouses by name or location
+
     @classmethod
     def find_by_name(cls, name):
         return cls.query.filter_by(name=name).first()

@@ -2,6 +2,9 @@ from flask_restful import Resource, reqparse
 from pkg_resources import require
 from models.item import ItemModel
 
+# This resource should contain a name, model_num, inventory amount, and a warehouse id in the body of the post and put requests
+# The warehouse id links the items to a specific warehouse
+
 class Item(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument("name",
@@ -61,6 +64,7 @@ class Item(Resource):
         
         item = ItemModel.find_by_uuid(uuid)
         
+        # if the item is found: edit it, otherwise create a new item
         if item:
             item.name = name
             item.inventory = inventory
@@ -72,13 +76,15 @@ class Item(Resource):
         item.save_to_db()
         
         return item.json()
-    
+
+# this resource represents a list of all items which match the name parameter
 class ItemList(Resource):
     def get(self, name):
         return {
             f"{name}s": list(map(lambda x: x.json(), ItemModel.find_all_by_name(name)))
         }
 
+# this resource represents all items in the database
 class AllItemsList(Resource):
     def get(self):
         return {

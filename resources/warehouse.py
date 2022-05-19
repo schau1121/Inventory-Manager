@@ -1,6 +1,8 @@
 from flask_restful import Resource, reqparse
 from models.warehouse import WarehouseModel
 
+# This resource should contain a name and a location
+
 class Warehouse(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('location',
@@ -22,6 +24,12 @@ class Warehouse(Resource):
         
         data = Warehouse.parser.parse_args()
         location = data['location']
+        
+        # if we only want 1 warehouse per location, add code block below
+        #if WarehouseModel.find_by_location(location):
+        #    return {"message": "A warehouse with location '{}' already exists."
+        #            .format(location)}, 400
+        
         warehouse = WarehouseModel(name, location)
         try:
             warehouse.save_to_db()
@@ -37,6 +45,7 @@ class Warehouse(Resource):
             return {"message": "Warehouse deleted"}
         return {"message": "Warehouse not found."}, 404
 
+# this resource represents a list of all warehouses
 class WarehouseList(Resource):
     def get(self):
         return {"warehouses": list(map(lambda x: x.json(), WarehouseModel.query.all()))}

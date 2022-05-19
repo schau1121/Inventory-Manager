@@ -1,12 +1,14 @@
 from db import db
 from models.warehouse import WarehouseModel
 
-# An item should contain a name, model_num, inventory amount
+# An item should contain a name, uuid, model_num, inventory amount
 # and a warehouse id
 #
 # there may be multiple items with the same name and model_num
 # but different warehouse_ids
 #
+# the find_by_uuid method returns a unique item
+# 
 # the find_by_name_warehouse method returns a unique item
 #
 # the find_all_by_name method should return a list of all
@@ -48,6 +50,10 @@ class ItemModel(db.Model):
         db.session.delete(self)
         db.session.commit()
     
+    # below are class methods which help find items by:
+    # uuid, name & warehouse, or name
+
+
     @classmethod
     def find_by_uuid(cls, uuid):
         return cls.query.filter_by(uuid=uuid).first()

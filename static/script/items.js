@@ -24,6 +24,7 @@ new_submit_btn.addEventListener("click", e => {
 
 getAllItems();
 
+// this function initializes the table for items and defines the header
 function createTable() {
     let table = document.createElement("table");
     let thead = document.createElement("thead");
@@ -66,6 +67,7 @@ function createTable() {
     items_table.appendChild(table);
 }
 
+// this function fetches all items and calls populateTable with the items list
 function getAllItems() {
     fetch(all_items_url)
         .then(response => response.json())
@@ -74,6 +76,7 @@ function getAllItems() {
         });
 }
 
+// this function populates the table item by item and initializes the event handlers for the edit/delete buttons
 function populateTable(items) {
     createTable();
     let tbody = document.querySelector("tbody");
@@ -132,6 +135,7 @@ function populateTable(items) {
     })
 }
 
+// this function deletes the specified item through the internal api
 async function deleteItem(id) {
     let item_url = `${window.location.href.replace("items", `api/item/${id}`)}`;
     let del_response = fetch(item_url, {
@@ -141,6 +145,7 @@ async function deleteItem(id) {
     return del_response;
 }
 
+// this function edits the specified item through the internal api
 async function putItem(item, id) {
     let item_url = `${window.location.href.replace("items", `api/item/${id}`)}`;
     console.log(item_url);
@@ -155,6 +160,7 @@ async function putItem(item, id) {
     return put_response;
 }
 
+// this function creates a new item through the internal api
 async function postItem(item, id) {
     let item_url = `${window.location.href.replace("items", `api/item/${id}`)}`;
     let post_response = fetch(item_url, {
@@ -168,6 +174,7 @@ async function postItem(item, id) {
     return post_response;
 }
 
+// this function opens the edit overlay and pre-fills the inputs with the current values
 function openEditOverlay(item) {
     edit_overlay.style.display = "flex";
     document.querySelector("input#edit-item-name").value = item.name;
@@ -176,11 +183,13 @@ function openEditOverlay(item) {
     document.querySelector("input#edit-item-warehouse-num").value = item.warehouse_id;
 }
 
+// this function refreshes the table
 function refreshTable() {
     items_table.innerHTML = "";
     getAllItems();
 }
 
+// this function handles an submit request when editing an item
 async function handleEditSubmit() {
     const new_name = document.querySelector("input#edit-item-name").value;
     const new_model_num = document.querySelector("input#edit-item-model").value;
@@ -221,6 +230,8 @@ async function handleNewSubmit() {
     out how to make modules work
 
     Need to change to something more secure
+
+    this function generates a UUID for each item
 */
 function createUUID(){
     let dt = new Date().getTime()
