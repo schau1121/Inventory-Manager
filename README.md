@@ -1,6 +1,6 @@
 # Inventory-Manager
 
-This is an inventory management web application built with Flask, Flask-RESTful, SQLAlchemy, HTML, CSS, and Vanilla JS.
+This is an inventory management web application built with Flask, Flask-RESTful, SQLAlchemy, HTML, CSS, and JavaScript.
 
 Check it out @ https://inventory-manager.schau1121.repl.co/
 
