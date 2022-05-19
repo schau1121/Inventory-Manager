@@ -178,7 +178,7 @@ async function postItem(item, id) {
 function openEditOverlay(item) {
     edit_overlay.style.display = "flex";
     document.querySelector("input#edit-item-name").value = item.name;
-    document.querySelector("input#edit-item-model").value = item.model;
+    document.querySelector("input#edit-item-model").value = item.model_num;
     document.querySelector("input#edit-item-inventory").value = item.inventory;
     document.querySelector("input#edit-item-warehouse-num").value = item.warehouse_id;
 }
