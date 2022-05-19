@@ -25,27 +25,12 @@ To run this web application locally, run
 
 in your terminal and navigate to localhost:5000 in your browser.
 
-## Things I Learned
-
-- Using fetch in JavaScript to interact with REST APIs
-- Backpopulating a form with values when editing an object
-- Working with Promises in JavaScript
-- Building a fullstack web application!!! (I'm really proud of myself haha)
-
-## Things I Could've Improved
-
-- This was my first time building a frontend, so my JS really needs some work
-- Spending more time in the design phase since I needed to refactor a good chunch of my code midway through development due to poorly designed API endpoints
-- Documenting and commenting more while coding, rather than going back and adding in comments later
-- Spending less time on design when building an mvp is the priority
-- Utilizing Jinja2 more effectively rather than writing entire HTML pages
-
 ## How It Works
 
 The backend is build off Flask, a lightweight python framework designed for the web. Basically, I implemented an internal API using Flask-RESTful so that the frontend can access data for items and warehouses. Furthermore, this API utilizes SQLAlchemy as the ORM so that if necessary, I can configure the app to work with a new database.
 The frontend is built with HTML, CSS, Vanilla JS, with Jinja2 tying it all together. Jinja2 is a web template engine which was ridiculously underutilized in this project, as I ultimately wrote individual HTML pages rather than working with templates.
 
-The internal API endpoints are as follows:
+## Internal API Endpoints
 
 ### Items
 
@@ -80,5 +65,19 @@ DEL /api/warehouse/<name>
   This deletes a warehouse from the database, specified by the name in the URL.
   
 GET /api/warehouses  
-  This returns a list of all warehouses in the database.
-  
+  This returns a list of all warehouses in the database.  
+
+## Things I Learned
+
+- Using fetch in JavaScript to interact with REST APIs
+- Backpopulating a form with values when editing an object
+- Working with Promises in JavaScript
+- Building a fullstack web application!!! (I'm really proud of myself haha)
+
+## Things I Could've Improved
+
+- This was my first time building a frontend, so my JS really needs some work
+- Spending more time in the design phase since I needed to refactor a good chunch of my code midway through development due to poorly designed API endpoints
+- Documenting and commenting more while coding, rather than going back and adding in comments later
+- Spending less time on design when building an mvp is the priority
+- Utilizing Jinja2 more effectively rather than writing entire HTML pages
