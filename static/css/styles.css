@@ -85,7 +85,7 @@ th, td {
     align-items: center;
 }
 
-.item-form {
+.item-form, .warehouse-form {
     width: 40%;
     height: 60%;
     background-color: rgb(223, 223, 223);
@@ -95,7 +95,7 @@ th, td {
     border-radius: 5px;
 }
 
-button#new-item {
+button#new-item, button#new-warehouse, button#submit {
     font-size: large;
     background-color: #004c3f;
     color: white;

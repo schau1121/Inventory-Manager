@@ -104,7 +104,7 @@ function populateTable(items) {
         curr_row_edit_btn.id = item.uuid;
         curr_row_edit_btn.addEventListener("click", e => {
             curr_item_id = e.target.id;
-            openEditOverlay();
+            openEditOverlay(item);
         })
 
         curr_row_del_btn.innerHTML = "×";
@@ -136,7 +136,7 @@ async function deleteItem(id) {
     let item_url = `${window.location.href.replace("items", `api/item/${id}`)}`;
     let del_response = fetch(item_url, {
         method: "DELETE"
-    })
+    });
 
     return del_response;
 }
@@ -168,8 +168,12 @@ async function postItem(item, id) {
     return post_response;
 }
 
-function openEditOverlay() {
+function openEditOverlay(item) {
     edit_overlay.style.display = "flex";
+    document.querySelector("input#edit-item-name").value = item.name;
+    document.querySelector("input#edit-item-model").value = item.model;
+    document.querySelector("input#edit-item-inventory").value = item.inventory;
+    document.querySelector("input#edit-item-warehouse-num").value = item.warehouse_id;
 }
 
 function refreshTable() {

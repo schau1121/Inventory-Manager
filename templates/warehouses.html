@@ -26,8 +26,24 @@
                 <div class="header-block">
                     <h1>Warehouses</h1>
                 </div>
-                <div class="cards"></div>
+                <div class="warehouses-table"></div>
+                <button id="new-warehouse">New</button>
             </div>
+        </div>
+    </div>
+
+    <div class="new-overlay">
+        <div class="warehouse-form">
+            <form id="new-warehouse-form">
+                <label for="warehouse-name">
+                    Warehouse name: <br>
+                    (spaces will be replaced with a "-")
+                </label><br>
+                <input type="text" id="warehouse-name"><br>
+                <label for="warehouse-location">Warehouse location:</label><br>
+                <input type="text" id="warehouse-location"><br>
+                <button id="submit">Submit</button>
+            </form>
         </div>
     </div>
 </body>

@@ -21,6 +21,7 @@ class WarehouseModel(db.Model):
     
     def json(self):
         return {
+            'id': self.id,
             'name': self.name,
             "location": self.location,
             "items": [item.json() for item in self.items.all()]
