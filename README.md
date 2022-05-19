@@ -4,6 +4,15 @@ This is an inventory management web application built with Flask, Flask-RESTful,
 
 Check it out @ https://inventory-manager.schau1121.repl.co/
 
+## Instructions For Running on Replit.com
+
+Currently the repl has some issues with the "Run" button and installing packages.
+
+To run this application enter the following in the console
+
+> pip install -r requirements.txt  
+> python app.py
+
 ## Requirements
 
 - Python 3.8 or greater
@@ -19,11 +28,12 @@ in your terminal.
 
 You can check out this project in the link above, otherwise:
 
-To run this web application locally, run
+To run this web application locally, remove 'host="0.0.0.0"' in app.py line 42  
+and run the following in your terminal.
 
 > python app.py
 
-in your terminal and navigate to localhost:5000 in your browser.
+Then navigate to localhost:5000 in your browser.
 
 ## How It Works
 
