@@ -70,15 +70,15 @@ GET /api/item/<name>
 
 ### Warehouses 
 
-POST /api/warehouse/<name>
+POST /api/warehouse/<name>  
   This takes in a body with a location and creates a warehouse in the database.
 
-GET /api/warehouse/<name>
+GET /api/warehouse/<name>  
   This returns a warehouse and its items, specified by the name in the URL.
 
-DEL /api/warehouse/<name>
+DEL /api/warehouse/<name>  
   This deletes a warehouse from the database, specified by the name in the URL.
   
-GET /api/warehouses
+GET /api/warehouses  
   This returns a list of all warehouses in the database.
   
