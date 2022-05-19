@@ -15,6 +15,9 @@ new_warehouse_submit_btn.addEventListener("click", e => {
 
 getAllWarehouses();
 
+/*
+    This function initializes the warehouse table with header details
+*/
 function createWarehouseTable() {
     let table = document.createElement("table");
     let thead = document.createElement("thead");
@@ -48,6 +51,10 @@ function createWarehouseTable() {
     warehouses_table.appendChild(table);
 }
 
+/*
+    This function fetches all warehouses and calls populateWarehouseTable
+    with the data
+*/
 function getAllWarehouses() {
     fetch(get_warehouses_url)
         .then(response => response.json())
@@ -56,6 +63,9 @@ function getAllWarehouses() {
         })
 }
 
+/*
+    This function populates the table row by row and displays the data
+*/
 function populateWarehouseTable(warehouses) {
     createWarehouseTable();
     let tbody = document.querySelector("tbody");
@@ -72,7 +82,11 @@ function populateWarehouseTable(warehouses) {
         curr_row_id.innerHTML = warehouse.id;
         curr_row_name.innerHTML = warehouse.name;
         curr_row_location.innerHTML = warehouse.location;
+        
+        // number of unique items in warehouse
         curr_row_items.innerHTML = warehouse.items.length;
+        
+        // sum up total amount of inventory for all items in warehouse
         curr_row_stock.innerHTML = warehouse.items.reduce((total, item) => {
             return total + item.inventory;
         }, 0);
@@ -96,6 +110,7 @@ function populateWarehouseTable(warehouses) {
     })
 }
 
+// this function deletes the specified warehouse through the internal api
 async function deleteWarehouse(name) {
     let warehouse_url = `${window.location.href.replace("warehouses", `api/warehouse/${name}`)}`;
     let del_response = fetch(warehouse_url, {
@@ -105,6 +120,7 @@ async function deleteWarehouse(name) {
     return del_response;
 }
 
+// this function posts a new warehouse through the interal api
 async function postWarehouse(warehouse, name) {
     let warehouse_url = `${window.location.href.replace("warehouses", `api/warehouse/${name}`)}`;
     let post_response = fetch(warehouse_url, {
@@ -118,7 +134,9 @@ async function postWarehouse(warehouse, name) {
     return post_response;
 }
 
+// this function refreshes the warehouse table
 function refreshWarehouseTable() {
+    // find a better way to reset the table, (I think this is why error messages disappear immediately when a bad request goes through)
     warehouses_table.innerHTML = "";
     getAllWarehouses();
 }
@@ -126,6 +144,8 @@ function refreshWarehouseTable() {
 /*
     Since the name is used as an identifier for the internal API, we want to remove
     all spaces and replace them with dashes so that it can be used in the URL
+
+    this function handles the submit request for a new warehouse
 */
 async function handleNewWarehouseSubmit() {
     let name = document.querySelector("input#warehouse-name").value;
@@ -138,3 +158,12 @@ async function handleNewWarehouseSubmit() {
     await postWarehouse(new_warehouse, name);
     refreshWarehouseTable();
 }
+
+/*
+    Some notes/ideas for future me:
+        - need to handle bad requests, currently, the webpage stays the same
+        - if a bad request happens, restart the input form process
+        - create a link in the table to a page with just the items from the specified
+            warehouse
+
+*/

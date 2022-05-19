@@ -22,10 +22,6 @@ class Warehouse(Resource):
         
         data = Warehouse.parser.parse_args()
         location = data['location']
-        if WarehouseModel.find_by_location(location):
-            return {"message": "A warehouse with location '{}' already exists."
-                    .format(location)}, 400
-        
         warehouse = WarehouseModel(name, location)
         try:
             warehouse.save_to_db()

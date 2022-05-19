@@ -26,6 +26,15 @@ th, td {
     border: 1px solid #000;
 }
 
+button {
+    font-size: large;
+    background-color: #004c3f;
+    color: white;
+    padding: 5px 20px;
+    border-radius: 5px;
+    border-style: none;
+}
+
 .main-body {
     display: flex;
 }
@@ -95,12 +104,8 @@ th, td {
     border-radius: 5px;
 }
 
-button#new-item, button#new-warehouse, button#submit {
-    font-size: large;
-    background-color: #004c3f;
-    color: white;
-    padding: 5px 20px;
-    border-radius: 5px;
+button#submit, button#new-item, button#new-warehouse {
+    margin-top: 10px;
 }
 
 a#github {
