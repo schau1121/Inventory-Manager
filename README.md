@@ -77,7 +77,7 @@ GET /api/warehouses
 ## Things I Could've Improved
 
 - This was my first time building a frontend, so my JS really needs some work
-- Spending more time in the design phase since I needed to refactor a good chunch of my code midway through development due to poorly designed API endpoints
+- Spending more time in the design phase since I needed to refactor a good chunck of my code midway through development due to poorly designed API endpoints
 - Documenting and commenting more while coding, rather than going back and adding in comments later
 - Spending less time on design when building an mvp is the priority
 - Utilizing Jinja2 more effectively rather than writing entire HTML pages
