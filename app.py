@@ -29,7 +29,7 @@ def items():
 def warehouses():
     return render_template("warehouses.html")
 
-# RestAPI endpoints
+# API endpoints
 api.add_resource(Warehouse, "/api/warehouse/<string:name>")
 api.add_resource(WarehouseList, "/api/warehouses")
 api.add_resource(Item, "/api/item/<string:uuid>")
