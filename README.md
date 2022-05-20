@@ -4,15 +4,6 @@ This is an inventory management web application built with Flask, Flask-RESTful,
 
 Check it out @ https://inventory-manager.schau1121.repl.co/
 
-## Instructions For Running on Replit.com
-
-Currently the repl has a bug with the "Run" button and installing packages, and I'm in contact with support to get this fixed asap!
-
-To run this application enter the following in the console
-
-> pip install -r requirements.txt  
-> python app.py
-
 ## Requirements
 
 - Python 3.8 or greater
