@@ -6,7 +6,7 @@ Check it out @ https://inventory-manager.schau1121.repl.co/
 
 ## Instructions For Running on Replit.com
 
-Currently the repl has some issues with the "Run" button and installing packages.
+Currently the repl has a bug with the "Run" button and installing packages, and I'm in contact with support to get this fixed asap!
 
 To run this application enter the following in the console
 
