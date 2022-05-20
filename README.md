@@ -44,34 +44,34 @@ The frontend is built with HTML, CSS, Vanilla JS, with Jinja2 tying it all toget
 
 ### Items
 
-POST /api/item/<uuid>  
+POST /api/item/\<uuid>  
   This takes in a body with a name, model number, inventory, and warehouse_id and creates a new item in the database.
   
-GET /api/item/<uuid>  
+GET /api/item/\<uuid>  
   This returns an item object, specified by the uuid in the URL.
   
-PUT /api/item/<uuid>  
+PUT /api/item/\<uuid>  
   This takes in a body with a name, model number, inventory, and warehouse_id and updates an existing item if found, otherwise, it creates a new item in the database.
 
-DELETE /api/item/<uuid>  
+DELETE /api/item/\<uuid>  
   This deletes an item from the database, specified by the uuid in the URL.
 
 GET /api/items  
   This returns a list of all items in the database.
 
-GET /api/item/<name>
+GET /api/item/\<name\>  
   This returns a list of all items which in the database which match the name specified in the URL.
   This endpoint has not been utilized yet in the app, but I fully intend on adding search functionality so that users can query items by name.
 
 ### Warehouses 
 
-POST /api/warehouse/<name>  
+POST /api/warehouse/\<name>  
   This takes in a body with a location and creates a warehouse in the database.
 
-GET /api/warehouse/<name>  
+GET /api/warehouse/\<name>  
   This returns a warehouse and its items, specified by the name in the URL.
 
-DEL /api/warehouse/<name>  
+DEL /api/warehouse/\<name>  
   This deletes a warehouse from the database, specified by the name in the URL.
   
 GET /api/warehouses  
